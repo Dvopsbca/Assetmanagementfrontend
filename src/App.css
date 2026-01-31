@@ -1,38 +1,127 @@
-.App {
+/* App.css */
+
+/* Container styling */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f9fc;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+h2 {
   text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  text-shadow: 1px 1px #bdc3c7;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Form styling */
+form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+form input,
+form select,
+form button {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+  transition: 0.3s;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Input hover/focus effect */
+form input:focus,
+form select:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 5px #3498db;
+}
+
+/* Button styling */
+form button {
+  grid-column: span 2;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+form button:hover {
+  background-color: #2980b9;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Table header */
+thead {
+  background: linear-gradient(90deg, #3498db, #6dd5fa);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+thead th {
+  padding: 12px;
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Table rows */
+tbody tr {
+  border-bottom: 1px solid #ddd;
+  transition: background 0.3s;
+}
+
+tbody tr:hover {
+  background-color: #f1faff;
+}
+
+/* Table cells */
+tbody td {
+  padding: 12px;
+}
+
+/* Action buttons in table */
+tbody button {
+  margin-right: 5px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.3s;
+}
+
+tbody button:first-child {
+  background-color: #f39c12; /* Edit button */
+  color: white;
+}
+
+tbody button:first-child:hover {
+  background-color: #e67e22;
+}
+
+tbody button:last-child {
+  background-color: #e74c3c; /* Delete button */
+  color: white;
+}
+
+tbody button:last-child:hover {
+  background-color: #c0392b;
 }
