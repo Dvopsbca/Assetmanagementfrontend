@@ -65,7 +65,7 @@ function App() {
     fetchAssets();
   };
 
-  const resetForm = () => {
+  const    resetForm = () => {
     setAsset({
       assetName: "",
       assetType: "",
