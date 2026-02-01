@@ -60,7 +60,7 @@ function App() {
   };
 
   // DELETE
-  const handleDelete = async (id) => {
+  const    handleDelete = async (id) => {
     await axios.delete(`${API_URL}/${id}`);
     fetchAssets();
   };
