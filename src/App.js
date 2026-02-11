@@ -6,11 +6,8 @@ const API_URL = "http://localhost:8080/api/assets";
 
 function App() {
   const [assets, setAssets] = useState([]);
-<<<<<<< HEAD
-=======
   const [editId, setEditId] = useState(null);
 
->>>>>>> 6cec90b41cf5899f9f2734d2c70e82201f3b43a1
   const [asset, setAsset] = useState({
     assetName: "",
     assetType: "",
@@ -26,44 +23,22 @@ function App() {
     warrantyExpiryDate: ""
   });
 
-<<<<<<< HEAD
-  const [editId, setEditId] = useState(null);
-
   // READ – Fetch all assets
-=======
->>>>>>> 6cec90b41cf5899f9f2734d2c70e82201f3b43a1
   useEffect(() => {
     fetchAssets();
   }, []);
 
   const fetchAssets = async () => {
-<<<<<<< HEAD
-    const response = await axios.get(API_URL);
-    setAssets(response.data);
-  };
-
-  // Handle input change
-=======
     const res = await axios.get(API_URL);
     setAssets(res.data);
   };
 
->>>>>>> 6cec90b41cf5899f9f2734d2c70e82201f3b43a1
+  // Handle input change
   const handleChange = (e) => {
     setAsset({ ...asset, [e.target.name]: e.target.value });
   };
 
-<<<<<<< HEAD
   // CREATE / UPDATE
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (editId === null) {
-      await axios.post(API_URL, asset);
-    } else {
-      await axios.put(`${API_URL}/${editId}`, asset);
-      setEditId(null);
-=======
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,26 +47,19 @@ function App() {
       setEditId(null);
     } else {
       await axios.post(API_URL, asset);
->>>>>>> 6cec90b41cf5899f9f2734d2c70e82201f3b43a1
     }
 
     resetForm();
     fetchAssets();
   };
 
-<<<<<<< HEAD
   // EDIT
-=======
->>>>>>> 6cec90b41cf5899f9f2734d2c70e82201f3b43a1
   const handleEdit = (a) => {
     setAsset(a);
     setEditId(a.assetId);
   };
 
-<<<<<<< HEAD
   // DELETE
-=======
->>>>>>> 6cec90b41cf5899f9f2734d2c70e82201f3b43a1
   const handleDelete = async (id) => {
     await axios.delete(`${API_URL}/${id}`);
     fetchAssets();
@@ -116,16 +84,9 @@ function App() {
 
   return (
     <div className="container">
-<<<<<<< HEAD
       <h2>Asset Management System</h2>
 
-      {/* CREATE / UPDATE FORM */}
       <form onSubmit={handleSubmit}>
-=======
-      <h1>Asset Management System</h1>
-
-      <form className="asset-form" onSubmit={handleSubmit}>
->>>>>>> 6cec90b41cf5899f9f2734d2c70e82201f3b43a1
         <input name="assetName" placeholder="Asset Name" value={asset.assetName} onChange={handleChange} required />
         <input name="assetType" placeholder="Asset Type" value={asset.assetType} onChange={handleChange} />
         <input name="assetCategory" placeholder="Asset Category" value={asset.assetCategory} onChange={handleChange} />
@@ -151,12 +112,7 @@ function App() {
         </button>
       </form>
 
-<<<<<<< HEAD
-      {/* READ – ASSET TABLE */}
       <table border="1">
-=======
-      <table>
->>>>>>> 6cec90b41cf5899f9f2734d2c70e82201f3b43a1
         <thead>
           <tr>
             <th>ID</th>
@@ -168,10 +124,6 @@ function App() {
             <th>Actions</th>
           </tr>
         </thead>
-<<<<<<< HEAD
-
-=======
->>>>>>> 6cec90b41cf5899f9f2734d2c70e82201f3b43a1
         <tbody>
           {assets.map((a) => (
             <tr key={a.assetId}>
@@ -182,13 +134,8 @@ function App() {
               <td>{a.assetStatus}</td>
               <td>{a.assignedTo}</td>
               <td>
-<<<<<<< HEAD
                 <button onClick={() => handleEdit(a)}>Edit</button>
                 <button onClick={() => handleDelete(a.assetId)}>Delete</button>
-=======
-                <button className="edit" onClick={() => handleEdit(a)}>Edit</button>
-                <button className="delete" onClick={() => handleDelete(a.assetId)}>Delete</button>
->>>>>>> 6cec90b41cf5899f9f2734d2c70e82201f3b43a1
               </td>
             </tr>
           ))}

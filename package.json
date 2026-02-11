@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-  "name": "asset",
-=======
-  "name": "assetfront",
->>>>>>> 6cec90b41cf5899f9f2734d2c70e82201f3b43a1
+
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,15 +7,11 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^13.5.0",
-<<<<<<< HEAD
-    "axios": "^1.13.2",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
-=======
+
     "axios": "^1.13.4",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
->>>>>>> 6cec90b41cf5899f9f2734d2c70e82201f3b43a1
+
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
