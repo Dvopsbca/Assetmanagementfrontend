@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 
-const API_URL = "http://localhost:8080/api/assets";
+const API_URL = "https://assetmanagementbackend-1.onrender.com/api/assets";
 
 function App() {
   const [assets, setAssets] = useState([]);
