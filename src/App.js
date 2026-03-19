@@ -29,9 +29,13 @@ function App() {
   }, []);
 
   const fetchAssets = async () => {
+  try {
     const res = await axios.get(API_URL);
     setAssets(res.data);
-  };
+  } catch (error) {
+    console.error("API Error:", error);
+  }
+};
 
   // Handle input change
   const handleChange = (e) => {
@@ -84,7 +88,7 @@ function App() {
 
   return (
     <div className="container">
-      <h2>Asset Management System</h2>
+      <h2>Asset Management System - Frontend</h2>
 
       <form onSubmit={handleSubmit}>
         <input name="assetName" placeholder="Asset Name" value={asset.assetName} onChange={handleChange} required />
@@ -145,4 +149,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 
