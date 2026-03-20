@@ -1,8 +1,38 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "./App.css";
 
 const API_URL = "https://assetmanagementbackend-1.onrender.com/api/assets";
+
+const axios = {
+  get: async (url) => {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("Network response was not ok");
+    return { data: await res.json() };
+  },
+  post: async (url, payload) => {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error("Network response was not ok");
+    return { data: await res.json() };
+  },
+  put: async (url, payload) => {
+    const res = await fetch(url, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error("Network response was not ok");
+    return { data: await res.json() };
+  },
+  delete: async (url) => {
+    const res = await fetch(url, { method: "DELETE" });
+    if (!res.ok) throw new Error("Network response was not ok");
+    return { data: await res.json() };
+  },
+};
 
 function App() {
   const [assets, setAssets] = useState([]);
