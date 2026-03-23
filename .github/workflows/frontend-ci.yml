@@ -30,7 +30,7 @@ jobs:
 
       - name: Verify build output
         run: |
-          ls -la build
+             ls -la build
           test -f build/index.html
 
       - name: Deploy to Azure Web App
