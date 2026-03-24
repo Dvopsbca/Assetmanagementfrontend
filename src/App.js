@@ -7,45 +7,37 @@ const axios = {
   get: async (url) => {
     try {
       const res = await fetch(url);
-      console.log("GET status:", res.status);
       if (!res.ok) throw new Error("GET failed");
       return { data: await res.json() };
     } catch (error) {
-      console.error("GET Error:", error);
       throw error;
     }
   },
 
   post: async (url, payload) => {
     try {
-      console.log("POST data:", payload);
       const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      console.log("POST status:", res.status);
       if (!res.ok) throw new Error("POST failed");
       return { data: await res.json() };
     } catch (error) {
-      console.error("POST Error:", error);
       throw error;
     }
   },
 
   put: async (url, payload) => {
     try {
-      console.log("PUT data:", payload);
       const res = await fetch(url, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      console.log("PUT status:", res.status);
       if (!res.ok) throw new Error("PUT failed");
       return { data: await res.json() };
     } catch (error) {
-      console.error("PUT Error:", error);
       throw error;
     }
   },
@@ -53,11 +45,9 @@ const axios = {
   delete: async (url) => {
     try {
       const res = await fetch(url, { method: "DELETE" });
-      console.log("DELETE status:", res.status);
       if (!res.ok) throw new Error("DELETE failed");
       return { data: await res.json() };
     } catch (error) {
-      console.error("DELETE Error:", error);
       throw error;
     }
   },
@@ -66,6 +56,7 @@ const axios = {
 function App() {
   const [assets, setAssets] = useState([]);
   const [editId, setEditId] = useState(null);
+  const [message, setMessage] = useState("");
 
   const [asset, setAsset] = useState({
     assetName: "",
@@ -91,7 +82,7 @@ function App() {
       const res = await axios.get(API_URL);
       setAssets(res.data);
     } catch (error) {
-      alert("Failed to fetch data");
+      setMessage("❌ Failed to fetch data");
     }
   };
 
@@ -105,18 +96,18 @@ function App() {
     try {
       if (editId) {
         await axios.put(`${API_URL}/${editId}`, asset);
-        alert("Asset updated successfully");
+        setMessage("✅ Asset updated successfully");
         setEditId(null);
       } else {
         await axios.post(API_URL, asset);
-        alert("Asset added successfully");
+        setMessage("✅ Asset added successfully");
       }
 
       resetForm();
       fetchAssets();
 
     } catch (error) {
-      alert("Failed to save data. Check backend or CORS.");
+      setMessage("❌ Failed to save data (check backend/CORS)");
     }
   };
 
@@ -128,10 +119,10 @@ function App() {
   const handleDelete = async (id) => {
     try {
       await axios.delete(`${API_URL}/${id}`);
-      alert("Deleted successfully");
+      setMessage("🗑️ Deleted successfully");
       fetchAssets();
     } catch (error) {
-      alert("Delete failed");
+      setMessage("❌ Delete failed");
     }
   };
 
@@ -154,6 +145,18 @@ function App() {
 
   return (
     <div className="container">
+
+      <h1 style={{ textAlign: "center", color: "#2c3e50" }}>
+        Asset Management System - Frontend
+      </h1>
+
+      {/* ✅ Message display */}
+      {message && (
+        <p style={{ textAlign: "center", color: "green", fontWeight: "bold" }}>
+          {message}
+        </p>
+      )}
+
       <form onSubmit={handleSubmit}>
         <input name="assetName" placeholder="Asset Name" value={asset.assetName} onChange={handleChange} required />
         <input name="assetType" placeholder="Asset Type" value={asset.assetType} onChange={handleChange} />
@@ -209,6 +212,7 @@ function App() {
           ))}
         </tbody>
       </table>
+
     </div>
   );
 }
