@@ -5,32 +5,61 @@ const API_URL = "https://assetmanagementbackend-1.onrender.com/api/assets";
 
 const axios = {
   get: async (url) => {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("Network response was not ok");
-    return { data: await res.json() };
+    try {
+      const res = await fetch(url);
+      console.log("GET status:", res.status);
+      if (!res.ok) throw new Error("GET failed");
+      return { data: await res.json() };
+    } catch (error) {
+      console.error("GET Error:", error);
+      throw error;
+    }
   },
+
   post: async (url, payload) => {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error("Network response was not ok");
-    return { data: await res.json() };
+    try {
+      console.log("POST data:", payload);
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      console.log("POST status:", res.status);
+      if (!res.ok) throw new Error("POST failed");
+      return { data: await res.json() };
+    } catch (error) {
+      console.error("POST Error:", error);
+      throw error;
+    }
   },
+
   put: async (url, payload) => {
-    const res = await fetch(url, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    if (!res.ok) throw new Error("Network response was not ok");
-    return { data: await res.json() };
+    try {
+      console.log("PUT data:", payload);
+      const res = await fetch(url, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      console.log("PUT status:", res.status);
+      if (!res.ok) throw new Error("PUT failed");
+      return { data: await res.json() };
+    } catch (error) {
+      console.error("PUT Error:", error);
+      throw error;
+    }
   },
+
   delete: async (url) => {
-    const res = await fetch(url, { method: "DELETE" });
-    if (!res.ok) throw new Error("Network response was not ok");
-    return { data: await res.json() };
+    try {
+      const res = await fetch(url, { method: "DELETE" });
+      console.log("DELETE status:", res.status);
+      if (!res.ok) throw new Error("DELETE failed");
+      return { data: await res.json() };
+    } catch (error) {
+      console.error("DELETE Error:", error);
+      throw error;
+    }
   },
 };
 
@@ -53,50 +82,57 @@ function App() {
     warrantyExpiryDate: ""
   });
 
-  // READ – Fetch all assets
   useEffect(() => {
     fetchAssets();
   }, []);
 
   const fetchAssets = async () => {
-  try {
-    const res = await axios.get(API_URL);
-    setAssets(res.data);
-  } catch (error) {
-    console.error("API Error:", error);
-  }
-};
+    try {
+      const res = await axios.get(API_URL);
+      setAssets(res.data);
+    } catch (error) {
+      alert("Failed to fetch data");
+    }
+  };
 
-  // Handle input change
   const handleChange = (e) => {
     setAsset({ ...asset, [e.target.name]: e.target.value });
   };
 
-  // CREATE / UPDATE
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (editId) {
-      await axios.put(`${API_URL}/${editId}`, asset);
-      setEditId(null);
-    } else {
-      await axios.post(API_URL, asset);
-    }
+    try {
+      if (editId) {
+        await axios.put(`${API_URL}/${editId}`, asset);
+        alert("Asset updated successfully");
+        setEditId(null);
+      } else {
+        await axios.post(API_URL, asset);
+        alert("Asset added successfully");
+      }
 
-    resetForm();
-    fetchAssets();
+      resetForm();
+      fetchAssets();
+
+    } catch (error) {
+      alert("Failed to save data. Check backend or CORS.");
+    }
   };
 
-  // EDIT
   const handleEdit = (a) => {
     setAsset(a);
     setEditId(a.assetId);
   };
 
-  // DELETE
   const handleDelete = async (id) => {
-    await axios.delete(`${API_URL}/${id}`);
-    fetchAssets();
+    try {
+      await axios.delete(`${API_URL}/${id}`);
+      alert("Deleted successfully");
+      fetchAssets();
+    } catch (error) {
+      alert("Delete failed");
+    }
   };
 
   const resetForm = () => {
@@ -179,4 +215,4 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
