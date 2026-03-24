@@ -118,7 +118,7 @@ function App() {
 
   return (
     <div className="container">
-      <h2>Asset Management System - Frontend</h2>
+      <h2>Asset Management System-Frontend</h2>
 
       <form onSubmit={handleSubmit}>
         <input name="assetName" placeholder="Asset Name" value={asset.assetName} onChange={handleChange} required />

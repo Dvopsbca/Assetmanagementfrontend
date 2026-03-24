@@ -3,6 +3,12 @@ name: Frontend CI/CD Pipeline
 on:
   push:
     branches:
+<<<<<<< HEAD
+=======
+       - main
+  pull_request:
+    branches:
+>>>>>>> 7609fde (sp added)
       - main
   workflow_dispatch:
 
